@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+"use strict";
+
 const fs = require('fs');
 const winston = require('winston');
 const chalk = require('chalk');
@@ -124,7 +128,7 @@ async function fetchCM1000Events() {
                 body: JSON.stringify(tableArray),
                 headers: postHeaders
             });
-            responseJson = await postResponse.json();
+            let responseJson = await postResponse.json();
             logger.info((responseJson.length == 0 ? (chalk.green('No')) : (chalk.bgRed(responseJson.length))) + ' events to add to database');
             if(responseJson.length != 0) {
                 logger.info('Oldest: ' + responseJson[0].time + ' Newest: ' + responseJson[responseJson.length -1].time);
